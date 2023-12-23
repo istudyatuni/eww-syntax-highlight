@@ -1,0 +1,83 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+name: Yuck
+file_extensions:
+  - yuck
+scope: source.yuck
+
+variables:
+  keywords: '(?:defwidget|defwindow|defpoll|defvar|deflisten|geometry|struts|include)'
+  ident: '[\w-]+'
+
+contexts:
+#   # The prototype context is prepended to all contexts but those setting
+#   # meta_include_prototype: false.
+#   prototype:
+#     - include: comments
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: arguments
+    - include: keywords
+    - include: strings
+    - include: comments
+    - include: primitives
+
+  arguments:
+    - match: '\[(.*)\]'
+      captures:
+        1: entity.name.type.yuck
+    - match: '{(.+?)\s'
+      captures:
+        1: entity.name.type.yuck
+
+  keywords:
+    - match: '(?<={{keywords}})\s*\b{{ident}}\b'
+      scope: variable.function.yuck
+    - match: '\(\s*(({{keywords}})|({{ident}}))'
+      captures:
+        2: keyword.control.yuck
+        3: variable.function.yuck
+    - match: '\b({{keywords}})\b'
+      scope: invalid
+
+  strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.yuck
+      push: inside_string
+    - match: '`'
+      embed: scope:source.shell
+      escape: '(?<!\\)`'
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.yuck
+    - match: '\\.'
+      scope: constant.character.escape.yuck
+    - match: '"'
+      scope: punctuation.definition.string.end.yuck
+      pop: true
+
+  primitives:
+    - match: ':{{ident}}\s?'
+      # original is variable.yuck
+      scope: variable.parameter.yuck
+    - match: '\b(true|false)\b'
+      scope: constant.language.boolean.yuck
+    - match: '\b[A-Z\d_]+?\b'
+      scope: constant.character.yuck
+    # original is '\d+'
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.yuck
+
+  comments:
+    # Comments begin with a ';' and finish at the end of the line.
+    - match: ';'
+      scope: punctuation.definition.comment.yuck
+      push:
+        # This is an anonymous context push for brevity.
+        - meta_scope: comment.line.semi-colon.yuck
+        - match: $\n?
+          pop: true

@@ -1,0 +1,15 @@
+{
+  "scope": "source.yuck",
+  "completions": [
+    { "trigger": "EWW_TEMPS", "contents": "EWW_TEMPS", "kind": "variable", "annotation": "Heat of the components in Celcius" },
+    { "trigger": "EWW_RAM", "contents": "EWW_RAM", "kind": "variable", "annotation": "Information on ram and swap usage in kB." },
+    { "trigger": "EWW_DISK", "contents": "EWW_DISK", "kind": "variable", "annotation": "Information on on all mounted partitions" },
+    { "trigger": "EWW_BATTERY", "contents": "EWW_BATTERY", "kind": "variable", "annotation": "Battery capacity in procent of the main battery" },
+    { "trigger": "EWW_CPU", "contents": "EWW_CPU", "kind": "variable", "annotation": "Information on the CPU cores: frequency and usage" },
+    { "trigger": "EWW_NET", "contents": "EWW_NET", "kind": "variable", "annotation": "Bytes up/down on all interfaces" },
+    { "trigger": "EWW_TIME", "contents": "EWW_TIME", "kind": "variable", "annotation": "The current UNIX timestamp" },
+    { "trigger": "EWW_CONFIG_DIR", "contents": "EWW_CONFIG_DIR", "kind": "variable", "annotation": "Path to the eww configuration of the current process" },
+    { "trigger": "EWW_CMD", "contents": "EWW_CMD", "kind": "variable", "annotation": "eww command running in the current configuration, useful in event handlers" },
+    { "trigger": "EWW_EXECUTABLE", "contents": "EWW_EXECUTABLE", "kind": "variable", "annotation": "Full path of the eww executable" },
+  ]
+}

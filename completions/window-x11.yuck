@@ -1,0 +1,12 @@
+(defwindow ${1:name}
+           :monitor ${2:0}
+           :geometry (geometry :x "${3:0%}"
+                               :y "${4:20px}"
+                               :width "${5:90%}"
+                               :height "${6:30px}"
+                               :anchor "${7:center}")
+           :stacking "${8:fg}"
+           :reserve (struts :distance "${9:40px}" :side "${10:top}")
+           :windowtype "${11:dock}"
+           :wm-ignore ${12:false}
+  $0)

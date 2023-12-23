@@ -1,0 +1,12 @@
+(defwindow ${1:name}
+           :monitor ${2:0}
+           :geometry (geometry :x "${3:0%}"
+                               :y "${4:20px}"
+                               :width "${5:90%}"
+                               :height "${6:30px}"
+                               :anchor "${7:center}")
+           :stacking "${8:fg}"
+           :exclusive ${9:false}
+           :focusable ${10:false}
+           :namespace "$11"
+  $0)

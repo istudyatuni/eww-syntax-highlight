@@ -1,0 +1,25 @@
+diff --git a/gen-docs.ts b/gen-docs.ts
+index 65d5d48..7e308ae 100644
+--- a/gen-docs.ts
++++ b/gen-docs.ts
+@@ -164,6 +164,20 @@ function parseDocs(code: string) {
+ }
+ 
+ function printDocs(vars: Record<string, string>, docs: Record<string, Widget>) {
++    const res = Object.values(docs)
++        .filter((x) => x.isVisible)
++        .map((x) => {
++            x.props = [
++                ...x.props.map((p) => {
++                    p.desc = p.desc.replace(/\$\w+/g, (x) => vars[x.replace("$", "")])
++                    return p
++                }),
++                ...x.exts.map((w) => docs[w]).flatMap((w) => w.props),
++            ];
++            return x;
++        })
++    Deno.writeTextFile("./widgets.json", JSON.stringify(res));
++
+     const output = Object.values(docs)
+         .filter((x) => x.isVisible)
+         .map((x) => {
